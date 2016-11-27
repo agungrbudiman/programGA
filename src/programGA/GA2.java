@@ -89,6 +89,7 @@ public class GA2 {
                 for (int i = 0; i < k.open.size(); i++) {
                     if (graf.cekJalur(k.getGen(k.listGen.size() - 1), k.getOpen(i)) && graf.cekJalur('G', k.getOpen(i))) {
                         k.addGen(k.getOpen(i));
+                        k.rmOpen(i);
                         break;
                     }
                 }
@@ -163,7 +164,7 @@ public class GA2 {
                 p.getAnak(p.listAnak.size()-1).listGen.set(j, p.getKromosom(i).getGen(j));
             }
         }
-        fixKromosom(p,0);
+        fixKromosom(p,1);
         hitungfitness(p,1);
         System.out.println("");
     }
