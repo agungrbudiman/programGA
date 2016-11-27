@@ -29,8 +29,8 @@ public class Driver {
         System.out.println("");
         
         System.out.println("==========FIX KROMOSOM+FITNESS==========");
-        ga.fixKromosom(p);
-        ga.hitungfitness(p);
+        ga.fixKromosom(p,0);
+        ga.hitungfitness(p,0);
         for (int i = 0; i < p.listKromosom.size(); i++) {
             for (int j = 0; j < p.getKromosom(i).listGen.size(); j++) {
                 System.out.print(p.getKromosom(i).getGen(j)+" ");
