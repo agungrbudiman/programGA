@@ -12,17 +12,17 @@ import java.util.ArrayList;
  * @author agungrb
  */
 public class Populasi {
-    public ArrayList<Kromosom> listKromosom = new ArrayList();
+    public ArrayList<Kromosom> listParent = new ArrayList();
     public ArrayList<Kromosom> listAnak = new ArrayList();
     public ArrayList<Double> probKumulatif = new ArrayList();
     public double totalFitness;
     
-    public void addKromosom(Kromosom k) {
-        listKromosom.add(k);
+    public void addParent(Kromosom k) {
+        listParent.add(k);
     }
     
-    public Kromosom getKromosom(int idx) {
-        return listKromosom.get(idx);
+    public Kromosom getParent(int idx) {
+        return listParent.get(idx);
     }
     
     public void addAnak(Kromosom k) {

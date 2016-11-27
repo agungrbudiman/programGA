@@ -6,12 +6,13 @@
 package programGA;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 /**
  *
  * @author agungrb
  */
-public class Kromosom {
+public class Kromosom implements Comparable<Kromosom> {
     public ArrayList<Character> listGen = new ArrayList();
     public ArrayList<Character> open = new ArrayList();
     public double fitness=0;
@@ -38,6 +39,16 @@ public class Kromosom {
     
     public void rmOpen(int idx) {
         open.remove(idx);
+    }
+
+    @Override
+    public int compareTo(Kromosom k) {
+       if(this.fitness > k.fitness) {
+           return -1;
+       }
+       else {
+           return 1;
+       }
     }
     
 }
