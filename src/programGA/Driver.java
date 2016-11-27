@@ -42,6 +42,12 @@ public class Driver {
         System.out.println("================SELEKSI================");
         p = ga.seleksi(p);
         for (int i = 0; i < p.listKromosom.size(); i++) {
+            for (int j = 0; j < p.getKromosom(i).open.size(); j++) {
+                System.out.print(p.getKromosom(i).getOpen(j)+" ");
+            }
+            System.out.println("");
+        }
+        for (int i = 0; i < p.listKromosom.size(); i++) {
             for (int j = 0; j < p.getKromosom(i).listGen.size(); j++) {
                 System.out.print(p.getKromosom(i).getGen(j)+" ");
             }
@@ -51,6 +57,12 @@ public class Driver {
         
         System.out.println("================CROSSOVER================");
         ga.crossover(p);
+        for (int i = 0; i < p.listAnak.size(); i++) {
+            for (int j = 0; j < p.getAnak(i).open.size(); j++) {
+                System.out.print(p.getAnak(i).getOpen(j)+" ");
+            }
+            System.out.println("");
+        }
         for (int i = 0; i < p.listAnak.size(); i++) {
             for (int j = 0; j < p.getAnak(i).listGen.size(); j++) {
                 System.out.print(p.getAnak(i).getGen(j)+" ");

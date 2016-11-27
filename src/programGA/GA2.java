@@ -64,7 +64,7 @@ public class GA2 {
             while (i < 6) {
                 if (graf.cekJalur('G', k.getGen(i))) {
                     for (int j = i + 1; j < 6; j++) {
-                        k.addOpen(k.getGen(i));
+                        k.addOpen(k.getGen(j));
                         k.listGen.set(j, '0');
                     }
                     break;
@@ -165,7 +165,12 @@ public class GA2 {
             System.out.print(rand1+"-"+rand2+"|");
             
             p.listAnak.add(new Kromosom());
-            p.listAnak.get(p.listAnak.size()-1).listGen = (ArrayList<Character>)p.getKromosom(i+1).listGen.clone();
+            for (Character c : p.getKromosom(i+1).listGen) {
+                p.listAnak.get(p.listAnak.size()-1).addGen(c);
+            }
+            for (Character c : p.getKromosom(i+1).open) {
+                p.listAnak.get(p.listAnak.size()-1).addOpen(c);
+            }
             
             for (int j = rand1; j <= rand2; j++) {
                 int k;
