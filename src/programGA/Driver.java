@@ -28,17 +28,28 @@ public class Driver {
         GA2 ga = new GA2(graf,jKromosom);
         ga.generateKromosom();
         
-        for (int i = 0; i < jGenerasi; i++) {
-            ga.proses();
-            System.out.println("=================GENERASI KE-"+(i+1)+"=================");
-            System.out.println("==================CALON PARENT==================");
+        for (int i = 0; i < jGenerasi; i++) {;
+            ga.fixKromosom(0);
+            ga.hitungfitness(0);
+            System.out.println("==================GENERASI KE-"+(i+1)+"==================");
+            System.out.println("===================CALON PARENT===================");
             for (Kromosom k : ga.p.listParent) {
                 for (int j = 0; j < k.listGen.size(); j++) {
                     System.out.print(k.getGen(j)+" "); 
                 }
                 System.out.println("fitness : "+k.fitness);
             }
-            System.out.println("======================ANAK=====================");
+            ga.seleksi();
+            System.out.println("====================PASANGAN====================");
+            for (Kromosom k : ga.p.listParent) {
+                for (int j = 0; j < k.listGen.size(); j++) {
+                    System.out.print(k.getGen(j)+" "); 
+                }
+                System.out.println("fitness : "+k.fitness);
+            }
+            ga.crossover();
+            ga.mutasi();
+            System.out.println("======================ANAK======================");
             for (Kromosom k : ga.p.listAnak) {
                 for (int j = 0; j < k.listGen.size(); j++) {
                     System.out.print(k.getGen(j)+" "); 
