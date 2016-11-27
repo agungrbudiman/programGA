@@ -40,14 +40,14 @@ public class Driver {
         System.out.println("");
         
         System.out.println("================SELEKSI================");
-        ga.seleksi(p);
-//        for (int i = 0; i < p.listKromosom.size(); i++) {
-//            for (int j = 0; j < p.getKromosom(i).listGen.size(); j++) {
-//                System.out.print(p.getKromosom(i).getGen(j)+" ");
-//            }
-//            System.out.println("fitness : "+p.getKromosom(i).fitness);
-//        }
-//        System.out.println("");
+        p = ga.seleksi(p);
+        for (int i = 0; i < p.listKromosom.size(); i++) {
+            for (int j = 0; j < p.getKromosom(i).listGen.size(); j++) {
+                System.out.print(p.getKromosom(i).getGen(j)+" ");
+            }
+            System.out.println("fitness : "+p.getKromosom(i).fitness);
+        }
+        System.out.println("");
     }
     
 }

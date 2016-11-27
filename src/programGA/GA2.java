@@ -99,15 +99,23 @@ public class GA2 {
         p.totalFitness = sumFitness;
     }
     
-    public void seleksi(Populasi p) {
+    public Populasi seleksi(Populasi p) {
+        Populasi temp = new Populasi();
         for (Kromosom k : p.listKromosom) {
             p.probKumulatif.add(k.fitness/p.totalFitness);
         }
         for (int i = 1; i < p.probKumulatif.size(); i++) {
             p.probKumulatif.set(i, p.probKumulatif.get(i)+p.probKumulatif.get(i-1));
         }
+        int i=0;
         for (Kromosom k : p.listKromosom) {
-            
+            double randomNum = randomDouble(0,1);
+            while(randomNum >= p.probKumulatif.get(i)) {
+                i++;
+            }
+            temp.addKromosom(p.getKromosom(i));
+            i=0;
         }
+        return temp;
     }
 }
