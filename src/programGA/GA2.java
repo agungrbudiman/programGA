@@ -7,6 +7,7 @@ package programGA;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Random;
 
 /**
  *
@@ -19,6 +20,12 @@ public class GA2 {
     public GA2(Graf graf,int jKromosom) {
         this.graf = graf;
         this.jKromosom = jKromosom;
+    }
+    
+    public double randomDouble(int min, int max) {
+        Random r = new Random();
+        double randomValue = min + (max - min) * r.nextDouble();
+        return randomValue;
     }
     
     public Populasi generateKromosom() {
@@ -81,11 +88,26 @@ public class GA2 {
     }
     
     public void hitungfitness(Populasi p) {
+        double sumFitness=0;
         for (Kromosom k : p.listKromosom) {
             for (int i = 0; i < 5; i++) {
                 k.fitness = k.fitness + graf.getTime(k.getGen(i), k.getGen(i+1));
             }
             k.fitness = 1/k.fitness;
+            sumFitness = sumFitness + k.fitness;
+        }
+        p.totalFitness = sumFitness;
+    }
+    
+    public void seleksi(Populasi p) {
+        for (Kromosom k : p.listKromosom) {
+            p.probKumulatif.add(k.fitness/p.totalFitness);
+        }
+        for (int i = 1; i < p.probKumulatif.size(); i++) {
+            p.probKumulatif.set(i, p.probKumulatif.get(i)+p.probKumulatif.get(i-1));
+        }
+        for (Kromosom k : p.listKromosom) {
+            
         }
     }
 }

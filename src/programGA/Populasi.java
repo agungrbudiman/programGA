@@ -14,6 +14,8 @@ import java.util.ArrayList;
 public class Populasi {
     public ArrayList<Kromosom> listKromosom = new ArrayList();
     public ArrayList<Kromosom> listAnak = new ArrayList();
+    public ArrayList<Double> probKumulatif = new ArrayList();
+    public double totalFitness;
     
     public void addKromosom(Kromosom k) {
         listKromosom.add(k);
