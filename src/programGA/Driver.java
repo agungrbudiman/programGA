@@ -5,6 +5,8 @@
  */
 package programGA;
 
+import java.util.Scanner;
+
 /**
  *
  * @author agungrb
@@ -15,9 +17,17 @@ public class Driver {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
         Graf graf = new Graf();
-        GA2 ga = new GA2(graf,10);
+        int jKromosom, jGenerasi;
         
+        System.out.print("Jumlah Kromosom : "); jKromosom = scan.nextInt();
+        System.out.println("Jumlah Generasi : "); jGenerasi = scan.nextInt();
+        GA2 ga = new GA2(graf,jKromosom);
+        
+        for (String arg : args) {
+            
+        }
         System.out.println("===========GENERATE KROMOSOM============");
         Populasi p = ga.generateKromosom();
         for (int i = 0; i < p.listParent.size(); i++) {

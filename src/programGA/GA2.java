@@ -19,6 +19,7 @@ import java.util.Random;
 public class GA2 {
     private Graf graf;
     private int jKromosom;
+    private Populasi p;
     
     public GA2(Graf graf,int jKromosom) {
         this.graf = graf;
@@ -100,8 +101,18 @@ public class GA2 {
                         break;
                     }
                     else if(graf.cekJalur(k.getGen(k.listGen.size() - 1), k.getOpen(i))) {
-                        k.addGen(k.getOpen(i));
-                        k.rmOpen(i);
+                        boolean tanda=false;
+                        for (int j = 0; j < k.listGen.size(); j++) {
+                            if(k.getOpen(i) == k.getGen(j)) {
+                                tanda=true;
+                                break;
+                            }
+                            
+                        }
+                        if(!tanda) {
+                            k.addGen(k.getOpen(i));
+                            k.rmOpen(i);
+                        }
                     }
                 }
             }
