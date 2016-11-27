@@ -31,6 +31,7 @@ public class Driver {
         System.out.println("==========FIX KROMOSOM+FITNESS==========");
         ga.fixKromosom(p,0);
         ga.hitungfitness(p,0);
+        System.out.println("");
         for (int i = 0; i < p.listParent.size(); i++) {
             for (int j = 0; j < p.getParent(i).listGen.size(); j++) {
                 System.out.print(p.getParent(i).getGen(j)+" ");
@@ -41,6 +42,12 @@ public class Driver {
         
         System.out.println("================SELEKSI================");
         p = ga.seleksi(p);
+//        for (int i = 0; i < p.listParent.size(); i++) {
+//            for (int j = 0; j < p.getParent(i).open.size(); j++) {
+//                System.out.print(p.getParent(i).getOpen(j)+" ");
+//            }
+//            System.out.println("");
+//        }
         for (int i = 0; i < p.listParent.size(); i++) {
             for (int j = 0; j < p.getParent(i).listGen.size(); j++) {
                 System.out.print(p.getParent(i).getGen(j)+" ");
@@ -51,12 +58,19 @@ public class Driver {
         
         System.out.println("================CROSSOVER================");
         ga.crossover(p);
-        for (int i = 0; i < p.listParent.size(); i++) {
-            for (int j = 0; j < p.getParent(i).listGen.size(); j++) {
-                System.out.print(p.getParent(i).getGen(j)+" ");
-            }
-            System.out.println("fitness : "+p.getParent(i).fitness);
-        }
+//        for (int i = 0; i < p.listAnak.size(); i++) {
+//            for (int j = 0; j < p.getAnak(i).open.size(); j++) {
+//                System.out.print(p.getAnak(i).getOpen(j)+" ");
+//            }
+//            System.out.println("");
+//        }
+        
+//        for (int i = 0; i < p.listParent.size(); i++) {
+//            for (int j = 0; j < p.getParent(i).listGen.size(); j++) {
+//                System.out.print(p.getParent(i).getGen(j)+" ");
+//            }
+//            System.out.println("fitness : "+p.getParent(i).fitness);
+//        }
         System.out.println("");
         for (int i = 0; i < p.listAnak.size(); i++) {
             for (int j = 0; j < p.getAnak(i).listGen.size(); j++) {
@@ -68,7 +82,13 @@ public class Driver {
         
         System.out.println("================MUTASI================");
         ga.mutasi(p);
-        
+        for (int i = 0; i < p.listBertahan.size(); i++) {
+            for (int j = 0; j < p.getBertahan(i).listGen.size(); j++) {
+                System.out.print(p.getBertahan(i).getGen(j)+" ");
+            }
+            System.out.println("fitness : "+p.getBertahan(i).fitness);
+        }
+        System.out.println("");
     }
     
 }

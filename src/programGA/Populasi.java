@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class Populasi {
     public ArrayList<Kromosom> listParent = new ArrayList();
     public ArrayList<Kromosom> listAnak = new ArrayList();
+    public ArrayList<Kromosom> listBertahan = new ArrayList();
     public ArrayList<Double> probKumulatif = new ArrayList();
     public double totalFitness;
     
@@ -31,6 +32,14 @@ public class Populasi {
     
     public Kromosom getAnak(int idx) {
         return listAnak.get(idx);
+    }
+    
+    public void addBertahan(Kromosom k) {
+        listBertahan.add(k);
+    }
+    
+    public Kromosom getBertahan(int idx) {
+        return listBertahan.get(idx);
     }
 
 }

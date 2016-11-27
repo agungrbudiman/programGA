@@ -87,7 +87,8 @@ public class GA2 {
         for (Kromosom k : pointer) {
             k.listGen.removeAll(Arrays.asList('0'));
 
-            if (!graf.cekJalur('G', k.getGen(k.listGen.size() - 1))) {
+            while (!graf.cekJalur('G', k.getGen(k.listGen.size() - 1))) {
+//                System.out.print(k.getGen(k.listGen.size()-1)+"-");
                 for (int i = 0; i < k.open.size(); i++) {
                     if (graf.cekJalur(k.getGen(k.listGen.size() - 1), k.getOpen(i)) && graf.cekJalur('G', k.getOpen(i))) {
                         k.addGen(k.getOpen(i));
@@ -103,6 +104,7 @@ public class GA2 {
             for (int i = k.listGen.size(); i < 6; i++) {
                 k.addGen('0');
             }
+//            System.out.println("--");
         }
             
     }
@@ -162,7 +164,7 @@ public class GA2 {
                 rand2 = rand1 - rand2;
                 rand1 = rand1 - rand2;
             }
-            
+            System.out.print(rand1+"-"+rand2+"||");
             p.listAnak.add(new Kromosom());
             for (Character c : p.getParent(i+1).listGen) {
                 p.listAnak.get(p.listAnak.size()-1).addGen(c);
@@ -170,12 +172,15 @@ public class GA2 {
             for (Character c : p.getParent(i+1).open) {
                 p.listAnak.get(p.listAnak.size()-1).addOpen(c);
             }
+            for (Character c : p.getParent(i).open) {
+                p.listAnak.get(p.listAnak.size()-1).addOpen(c);
+            }
             
             for (int j = rand1; j <= rand2; j++) {
                 int k;
-                for (k = 0; k < p.getParent(i+1).listGen.size();k++) {
+                for (k = 0; k < p.getParent(i+1).listGen.size() && k!=-1;k++) {
                     if(p.getParent(i+1).getGen(k) == p.getParent(i).getGen(j)) {
-                        k=100;
+                        k=-1;
                         break;
                     }
                 }
@@ -185,6 +190,7 @@ public class GA2 {
                  
             }
         }
+        System.out.println("");
         fixKromosom(p,1);
         hitungfitness(p,1);
     }
@@ -192,18 +198,24 @@ public class GA2 {
     public void mutasi(Populasi p) {
         Populasi temp = new Populasi();
         for (Kromosom k : p.listParent) {
-            temp.addParent(k);
+            temp.addBertahan(k);
         }
         for (Kromosom k : p.listAnak) {
-            temp.addParent(k);
+            temp.addBertahan(k);
         }
-        Collections.sort(temp.listParent);
-        for (int i = 0; i < temp.listParent.size(); i++) {
-            for (int j = 0; j < temp.getParent(i).listGen.size(); j++) {
-                System.out.print(temp.getParent(i).getGen(j)+" ");
+        Collections.sort(temp.listBertahan);;
+        for (Kromosom k : temp.listBertahan) {
+            p.addBertahan(new Kromosom());
+            for (int i = 0; i < 6; i++) {
+                p.getBertahan(p.listBertahan.size()-1).addGen(k.getGen(i));
+                p.getBertahan(p.listBertahan.size()-1).addOpen(k.getGen(i));
             }
-            System.out.println("fitness : "+temp.getParent(i).fitness);
+            p.getBertahan(p.listBertahan.size()-1).fitness = k.fitness;
         }
-        System.out.println("");
+        for (int i = jKromosom; i < jKromosom+(jKromosom/2); i++) {
+            p.listBertahan.set(i, null);
+        }
+        p.listBertahan.removeAll(Arrays.asList(null,0));
+        
     }
 }
