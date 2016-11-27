@@ -57,21 +57,18 @@ public class GA2 {
     }
 
     public void fixKromosom(int x) {
-        boolean tanda = false;
-        ArrayList<Kromosom> pointer=null;
-        if(x==0) {
+        ArrayList<Kromosom> pointer = null;
+        if (x == 0) {
             pointer = p.listParent;
-        }
-        else if(x==1) {
+        } else if (x == 1) {
             pointer = p.listAnak;
-        }
-        else if(x==2) {
+        } else if (x == 2) {
             pointer = p.listBertahan;
         }
         for (Kromosom k : pointer) {
             int i = 0;
             while (!graf.cekJalur('S', k.getGen(i)) && i < k.listGen.size()) {
-                if(k.getGen(i) != 0) {
+                if (k.getGen(i) != 0) {
                     k.addOpen(k.getGen(i));
                 }
                 k.listGen.set(i, '0');
@@ -79,18 +76,18 @@ public class GA2 {
             }
             while (i < k.listGen.size()) {
                 if (graf.cekJalur('G', k.getGen(i))) {
+                System.out.println(pointer.size()+"-"+k.getGen(i));
                     for (int j = i + 1; j < k.listGen.size(); j++) {
-                        if(k.getGen(j) != 0) {
+                        if (k.getGen(j) != 0) {
                             k.addOpen(k.getGen(j));
                         }
                         k.listGen.set(j, '0');
                     }
-                    tanda = true;
                     break;
-                } else if (i < k.listGen.size()-1) {
+                } else if (i < k.listGen.size() - 1) {
                     int j = i + 1;
                     while (j < k.listGen.size() && !graf.cekJalur(k.getGen(i), k.getGen(j))) {
-                        if(k.getGen(j) != 0) {
+                        if (k.getGen(j) != 0) {
                             k.addOpen(k.getGen(j));
                         }
                         k.listGen.set(j, '0');
@@ -103,39 +100,36 @@ public class GA2 {
 
             }
         }
+        for (Kromosom k : pointer) {
+            k.listGen.removeAll(Arrays.asList('0'));
+            while (!graf.cekJalur('G', k.getGen(k.listGen.size() - 1))) {
+//                System.out.println(k.getGen(k.listGen.size() - 1));
+                for (int i = 0; i < k.open.size(); i++) {
+                    if (graf.cekJalur(k.getGen(k.listGen.size() - 1), k.getOpen(i)) && graf.cekJalur('G', k.getOpen(i))) {
+                        k.addGen(k.getOpen(i));
+                        k.rmOpen(i);
+                        break;
+                    } else if (graf.cekJalur(k.getGen(k.listGen.size() - 1), k.getOpen(i))) {
+                        boolean sign = false;
+                        for (int j = 0; j < k.listGen.size(); j++) {
+                            if (k.getOpen(i) == k.getGen(j)) {
+                                sign = true;
+                                break;
+                            }
 
-        if (!tanda) {
-            for (Kromosom k : pointer) {
-                k.listGen.removeAll(Arrays.asList('0'));
-                while (!graf.cekJalur('G', k.getGen(k.listGen.size() - 1))) {
-                    System.out.println(k.getGen(k.listGen.size() - 1));
-                    for (int i = 0; i < k.open.size(); i++) {
-                        if (graf.cekJalur(k.getGen(k.listGen.size() - 1), k.getOpen(i)) && graf.cekJalur('G', k.getOpen(i))) {
+                        }
+                        if (!sign) {
                             k.addGen(k.getOpen(i));
                             k.rmOpen(i);
-                            break;
-                        } else if (graf.cekJalur(k.getGen(k.listGen.size() - 1), k.getOpen(i))) {
-                            boolean tanda = false;
-                            for (int j = 0; j < k.listGen.size(); j++) {
-                                if (k.getOpen(i) == k.getGen(j)) {
-                                    tanda = true;
-                                    break;
-                                }
-
-                            }
-                            if (!tanda) {
-                                k.addGen(k.getOpen(i));
-                                k.rmOpen(i);
-                            }
                         }
                     }
                 }
-                for (int i = k.listGen.size(); i < 6; i++) {
-                    k.addGen('0');
-                }
             }
-
+            for (int i = k.listGen.size(); i < 6; i++) {
+                k.addGen('0');
+            }
         }
+
 
     }
 
@@ -155,7 +149,9 @@ public class GA2 {
             for (int i = 0; i < 5; i++) {
                 k.fitness = k.fitness + graf.getTime(k.getGen(i), k.getGen(i + 1));
             }
-            k.fitness = 1 / k.fitness;
+            k.fitness = k.fitness + graf.getTime('S', k.getGen(0)) + 9;
+            k.fitness = 1/k.fitness;
+            
             sumFitness = sumFitness + k.fitness;
         }
         p.totalFitness = sumFitness;

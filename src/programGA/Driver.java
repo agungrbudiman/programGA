@@ -52,16 +52,24 @@ public class Driver {
                 }
                 System.out.println("fitness : "+k.fitness);
             }
+            System.out.print("jalur terbaik : ");
+            for (int j = 0; j < ga.p.listBertahan.get(0).listGen.size(); j++) {
+                System.out.print(ga.p.listBertahan.get(0).getGen(j)+" ");
+            }
+            System.out.println("");
+            System.out.println("Cost = "+(int)(1/ga.p.listBertahan.get(0).fitness)+" menit");
+            
             ArrayList<Kromosom> temp = (ArrayList<Kromosom>) ga.p.listBertahan.clone();
             ga.p = new Populasi();
             for (int j = 0; j < temp.size(); j++) {
-                ga.p.listParent.add(j,new Kromosom());
+                ga.p.listParent.add(new Kromosom());
                 for (int jj = 0; jj < temp.get(j).listGen.size(); jj++) {
                    ga.p.listParent.get(j).addGen(temp.get(j).getGen(jj)); 
-                   
+                   if(jj < temp.get(j).open.size()) {
+                       ga.p.listParent.get(j).addOpen(temp.get(j).getOpen(jj)); 
+                   }
                 }
             }
-            System.out.println("");
             System.out.println("");
         }
   
