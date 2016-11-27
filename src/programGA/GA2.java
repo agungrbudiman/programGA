@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Random;
 
 /**
@@ -54,6 +55,9 @@ public class GA2 {
         }
         else if(x==1) {
             pointer = p.listAnak;
+        }
+        else if(x==2) {
+            pointer = p.listBertahan;
         }
         for (Kromosom k : pointer) {
             int i = 0;
@@ -117,6 +121,9 @@ public class GA2 {
         else if(x==1) {
             pointer = p.listAnak;
         }
+        else if(x==2) {
+            pointer = p.listBertahan;
+        }
         double sumFitness=0;
         for (Kromosom k : pointer) {
             for (int i = 0; i < 5; i++) {
@@ -164,17 +171,29 @@ public class GA2 {
                 rand2 = rand1 - rand2;
                 rand1 = rand1 - rand2;
             }
-            System.out.print(rand1+"-"+rand2+"||");
+//            System.out.print(rand1+"-"+rand2+"||");
+            HashSet<Character> temp = new HashSet();
             p.listAnak.add(new Kromosom());
             for (Character c : p.getParent(i+1).listGen) {
                 p.listAnak.get(p.listAnak.size()-1).addGen(c);
             }
             for (Character c : p.getParent(i+1).open) {
+                temp.add(c);
                 p.listAnak.get(p.listAnak.size()-1).addOpen(c);
             }
             for (Character c : p.getParent(i).open) {
+                temp.add(c);
                 p.listAnak.get(p.listAnak.size()-1).addOpen(c);
             }
+            
+//            for (Character character : temp) {
+//                System.out.print(character+"-");
+//            }
+            System.out.println("");
+            for (Character character : p.listAnak.get(p.listAnak.size()-1).open) {
+                System.out.print(character+"-");
+            }
+            
             
             for (int j = rand1; j <= rand2; j++) {
                 int k;
@@ -184,7 +203,7 @@ public class GA2 {
                         break;
                     }
                 }
-                if(k != 100) {
+                if(k != -1) {
                     p.getAnak(p.listAnak.size()-1).listGen.set(j, p.getParent(i).getGen(j));
                 } 
                  
@@ -216,6 +235,17 @@ public class GA2 {
             p.listBertahan.set(i, null);
         }
         p.listBertahan.removeAll(Arrays.asList(null,0));
+        
+        for (int i = 0; i < p.listBertahan.size(); i++) {
+            int rand1 = randomInteger(0,p.listBertahan.get(i).listGen.indexOf('0')-1);
+            int rand2 = randomInteger(0,p.listBertahan.get(i).listGen.indexOf('0')-1);
+            
+            if(rand1 != rand2) {
+                Collections.swap(p.listBertahan.get(i).listGen, rand1, rand2);
+            }
+            fixKromosom(p,2);
+            hitungfitness(p,2);
+        }
         
     }
 }
