@@ -57,6 +57,7 @@ public class Driver {
             }
             System.out.println("fitness : "+p.getAnak(i).fitness);
         }
+        System.out.println("");
     }
     
 }

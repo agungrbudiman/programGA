@@ -79,6 +79,7 @@ public class GA2 {
                 } else {
                     i++;
                 }
+                
             }
         }
 
@@ -92,9 +93,13 @@ public class GA2 {
                         k.rmOpen(i);
                         break;
                     }
+                    else if(graf.cekJalur(k.getGen(k.listGen.size() - 1), k.getOpen(i))) {
+                        System.out.println("ok");
+                        k.addGen(k.getOpen(i));
+                        k.rmOpen(i);
+                    }
                 }
             }
-
             for (int i = k.listGen.size(); i < 6; i++) {
                 k.addGen('0');
             }
@@ -157,12 +162,25 @@ public class GA2 {
                 rand2 = rand1 - rand2;
                 rand1 = rand1 - rand2;
             }
-            System.out.print(rand1+"-"+rand2+"||");
+            System.out.print(rand1+"-"+rand2+"|");
             
-            p.addAnak(p.getKromosom(i+1));
+            p.listAnak.add(new Kromosom());
+            p.listAnak.get(p.listAnak.size()-1).listGen = (ArrayList<Character>)p.getKromosom(i+1).listGen.clone();
+            
             for (int j = rand1; j <= rand2; j++) {
-                p.getAnak(p.listAnak.size()-1).listGen.set(j, p.getKromosom(i).getGen(j));
+                int k;
+                for (k = 0; k < p.getKromosom(i+1).listGen.size();k++) {
+                    if(p.getKromosom(i+1).getGen(k) == p.getKromosom(i).getGen(j)) {
+                        k=100;
+                        break;
+                    }
+                }
+                if(k != 100) {
+                    p.getAnak(p.listAnak.size()-1).listGen.set(j, p.getKromosom(i).getGen(j));
+                } 
+                 
             }
+            System.out.print("||");
         }
         fixKromosom(p,1);
         hitungfitness(p,1);
