@@ -16,7 +16,7 @@ public class Driver {
      */
     public static void main(String[] args) {
         Graf graf = new Graf();
-        GA ga = new GA(graf,10,0.25,0.25);
+        GA2 ga = new GA2(graf,10);
         
         System.out.println("===========GENERATE KROMOSOM============");
         Populasi p = ga.generateKromosom();
@@ -30,7 +30,7 @@ public class Driver {
         
         System.out.println("==========FIX KROMOSOM+FITNESS==========");
         ga.fixKromosom(p);
-        ga.hitungFitness(p);
+//        ga.hitungFitness(p);
         for (int i = 0; i < p.listKromosom.size(); i++) {
             for (int j = 0; j < p.getKromosom(i).listGen.size(); j++) {
                 System.out.print(p.getKromosom(i).getGen(j)+" ");
@@ -39,15 +39,15 @@ public class Driver {
         }
         System.out.println("");
         
-        System.out.println("================SELEKSI================");
-        p = ga.seleksi(p);
-        for (int i = 0; i < p.listKromosom.size(); i++) {
-            for (int j = 0; j < p.getKromosom(i).listGen.size(); j++) {
-                System.out.print(p.getKromosom(i).getGen(j)+" ");
-            }
-            System.out.println("fitness : "+p.getKromosom(i).fitness);
-        }
-        System.out.println("");
+//        System.out.println("================SELEKSI================");
+//        p = ga.seleksi(p);
+//        for (int i = 0; i < p.listKromosom.size(); i++) {
+//            for (int j = 0; j < p.getKromosom(i).listGen.size(); j++) {
+//                System.out.print(p.getKromosom(i).getGen(j)+" ");
+//            }
+//            System.out.println("fitness : "+p.getKromosom(i).fitness);
+//        }
+//        System.out.println("");
     }
     
 }
