@@ -48,7 +48,6 @@ public class Driver {
                 System.out.println("fitness : "+k.fitness);
             }
             ga.crossover();
-            ga.mutasi();
             System.out.println("======================ANAK======================");
             for (Kromosom k : ga.p.listAnak) {
                 for (int j = 0; j < k.listGen.size(); j++) {
@@ -56,6 +55,7 @@ public class Driver {
                 }
                 System.out.println("fitness : "+k.fitness);
             }
+            ga.mutasi();
             System.out.println("====================BERTAHAN====================");
             for (Kromosom k : ga.p.listBertahan) {
                 for (int j = 0; j < k.listGen.size(); j++) {

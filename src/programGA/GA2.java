@@ -174,12 +174,12 @@ public class GA2 {
                 i++;
             }
             temp.add(new Kromosom());
-            for (int j = 0; j < k.listGen.size(); j++) {
-                temp.get(temp.size()-1).addGen(k.getGen(j));
-                if(j < k.open.size()) {
-                    temp.get(temp.size()-1).addOpen(k.getOpen(j));
+            for (int j = 0; j < p.getParent(i).listGen.size(); j++) {
+                temp.get(temp.size()-1).addGen(p.getParent(i).getGen(j));
+                temp.get(temp.size()-1).fitness = p.getParent(i).fitness;
+                if(j < p.getParent(i).open.size()) {
+                    temp.get(temp.size()-1).addOpen(p.getParent(i).getOpen(j));
                 }
-                temp.get(temp.size()-1).addGen(k.getGen(j));
             }
 //            temp.addParent(p.getParent(i));
         }
