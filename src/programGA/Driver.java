@@ -30,7 +30,7 @@ public class Driver {
         
         System.out.println("==========FIX KROMOSOM+FITNESS==========");
         ga.fixKromosom(p);
-//        ga.hitungFitness(p);
+        ga.hitungfitness(p);
         for (int i = 0; i < p.listKromosom.size(); i++) {
             for (int j = 0; j < p.getKromosom(i).listGen.size(); j++) {
                 System.out.print(p.getKromosom(i).getGen(j)+" ");

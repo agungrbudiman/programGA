@@ -79,4 +79,13 @@ public class GA2 {
             }
         }
     }
+    
+    public void hitungfitness(Populasi p) {
+        for (Kromosom k : p.listKromosom) {
+            for (int i = 0; i < 5; i++) {
+                k.fitness = k.fitness + graf.getTime(k.getGen(i), k.getGen(i+1));
+            }
+            k.fitness = 1/k.fitness;
+        }
+    }
 }
