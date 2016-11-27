@@ -136,11 +136,14 @@ public class GA2 {
             }
             int rand1 = randomInteger(0,minSize);
             int rand2 = randomInteger(0,minSize);
+            System.out.print(rand1+"-"+rand2+"||");
             
+            p.addAnak(p.getKromosom(i+1));
             for (int j = rand1; j <= rand2; j++) {
-                
+                p.getAnak(p.listAnak.size()-1).listGen.set(j, p.getKromosom(i).getGen(j));
             }
-            
         }
+        fixKromosom(p);
+        System.out.println("");
     }
 }

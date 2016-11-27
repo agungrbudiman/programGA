@@ -39,4 +39,5 @@ public class Kromosom {
     public void rmOpen(int idx) {
         open.remove(idx);
     }
+    
 }

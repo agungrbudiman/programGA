@@ -32,4 +32,5 @@ public class Populasi {
     public Kromosom getAnak(int idx) {
         return listAnak.get(idx);
     }
+
 }

@@ -51,6 +51,12 @@ public class Driver {
         
         System.out.println("================CROSSOVER================");
         ga.crossover(p);
+        for (int i = 0; i < p.listAnak.size(); i++) {
+            for (int j = 0; j < p.getAnak(i).listGen.size(); j++) {
+                System.out.print(p.getAnak(i).getGen(j)+" ");
+            }
+            System.out.println("fitness : "+p.getAnak(i).fitness);
+        }
     }
     
 }
