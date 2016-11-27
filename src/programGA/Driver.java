@@ -48,6 +48,9 @@ public class Driver {
             System.out.println("fitness : "+p.getKromosom(i).fitness);
         }
         System.out.println("");
+        
+        System.out.println("================CROSSOVER================");
+        ga.crossover(p);
     }
     
 }

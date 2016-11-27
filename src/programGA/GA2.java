@@ -28,6 +28,12 @@ public class GA2 {
         return randomValue;
     }
     
+    public int randomInteger(int min, int max) {
+        Random r = new Random();
+        int randomValue = r.nextInt(max-min+1) + min;
+        return randomValue;
+    }
+    
     public Populasi generateKromosom() {
         Populasi p = new Populasi();
         for (int i = 0; i < jKromosom; i++) {
@@ -117,5 +123,24 @@ public class GA2 {
             i=0;
         }
         return temp;
+    }
+    
+    public void crossover(Populasi p) {
+        for (int i = 0; i < p.listKromosom.size(); i+=2) {
+            int minSize = 0;
+            if(p.getKromosom(i).listGen.indexOf('0') <= p.getKromosom(i+1).listGen.indexOf('0')) {
+                minSize = p.getKromosom(i).listGen.indexOf('0')-1;
+            }
+            else {
+                minSize = p.getKromosom(i+1).listGen.indexOf('0')-1;
+            }
+            int rand1 = randomInteger(0,minSize);
+            int rand2 = randomInteger(0,minSize);
+            
+            for (int j = rand1; j <= rand2; j++) {
+                
+            }
+            
+        }
     }
 }
