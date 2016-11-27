@@ -5,6 +5,7 @@
  */
 package programGA;
 
+import java.util.Arrays;
 import java.util.Collections;
 
 /**
@@ -61,8 +62,21 @@ public class GA2 {
             }
         }
         
-        for (Object object : col) {
+        for (Kromosom k : p.listKromosom) {
+            k.listGen.removeAll(Arrays.asList('0'));
             
+            if(!graf.cekJalur('G', k.getGen(k.listGen.size()-1))) {
+                for (int i = 0; i < k.open.size(); i++) {
+                    if(graf.cekJalur(k.getGen(k.listGen.size()-1),k.getOpen(i)) && graf.cekJalur('G', k.getOpen(i))) {
+                        k.addGen(k.getOpen(i));
+                        break;
+                    }
+                }
+            }
+            
+            for (int i = k.listGen.size(); i < 6; i++) {
+                k.addGen('0');
+            }
         }
     }
 }

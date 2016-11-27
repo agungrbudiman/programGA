@@ -24,6 +24,10 @@ public class Kromosom {
         open.add(c);
     }
     
+    public Character getOpen(int idx) {
+        return open.get(idx);
+    }
+    
     public Character getGen(int idx) {
         return listGen.get(idx);
     }
