@@ -203,7 +203,7 @@ public class GA2 {
                 list.add(i);
             }
         }
-        System.out.println(list);
+//        System.out.println(list);
         if (list.size() > 0) {
 
             for (int i = 0; i < p.listParent.size(); i++) {
@@ -267,10 +267,10 @@ public class GA2 {
 
                     }
 //            i = jj-1;    
-                }
-            }
         fixKromosom(1);
         hitungfitness(1);
+                }
+            }
 //        System.out.println("ok2");
         }
     }
