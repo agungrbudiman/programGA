@@ -68,7 +68,7 @@ public class Driver {
                 System.out.println("fitness : "+k.fitness);
                 h++;
             }
-            System.out.println("ok");
+//            System.out.println("ok");
             ga.mutasi();
             System.out.println("====================BERTAHAN====================");
             h=0;
