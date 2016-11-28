@@ -271,7 +271,7 @@ public class GA2 {
             }
         fixKromosom(1);
         hitungfitness(1);
-        System.out.println("ok2");
+//        System.out.println("ok2");
         }
     }
 

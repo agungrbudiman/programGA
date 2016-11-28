@@ -20,13 +20,13 @@ public class Driver {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         Graf graf = new Graf();
-        int jKromosom=10, jGenerasi=5;
-        double pCross=0.25,pMutasi=0.5;
+        int jKromosom, jGenerasi;
+        double pCross,pMutasi;
         
-//        System.out.print("Jumlah Kromosom : "); jKromosom = scan.nextInt();
-//        System.out.print("Jumlah Generasi : "); jGenerasi = scan.nextInt();
-//        System.out.print("Probabilitas Crossover : "); pCross = scan.nextDouble();
-//        System.out.print("Probabilitas Mutasi : "); pMutasi = scan.nextDouble();
+        System.out.print("Jumlah Kromosom : "); jKromosom = scan.nextInt();
+        System.out.print("Jumlah Generasi : "); jGenerasi = scan.nextInt();
+        System.out.print("Probabilitas Crossover : "); pCross = scan.nextDouble();
+        System.out.print("Probabilitas Mutasi : "); pMutasi = scan.nextDouble();
         
         GA2 ga = new GA2(graf,jKromosom,pCross,pMutasi);
         ga.generateKromosom();
