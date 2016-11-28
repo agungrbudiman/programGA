@@ -68,8 +68,8 @@ public class Driver {
                 System.out.println("fitness : "+k.fitness);
                 h++;
             }
-            ga.mutasi();
             System.out.println("ok");
+            ga.mutasi();
             System.out.println("====================BERTAHAN====================");
             h=0;
             for (Kromosom k : ga.p.listBertahan) {

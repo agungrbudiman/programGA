@@ -271,7 +271,7 @@ public class GA2 {
             }
         fixKromosom(1);
         hitungfitness(1);
-            System.out.println("ok2");
+        System.out.println("ok2");
         }
     }
 
@@ -306,13 +306,17 @@ public class GA2 {
 //                System.out.print("mutasi : "+i+"-"+rand1+"-"+rand2+"||");
                 if (rand1 != rand2) {
                     Collections.swap(p.listBertahan.get(i).listGen, rand1, rand2);
+                    if(rand2<p.listBertahan.get(i).open.size()) {
+                    Collections.swap(p.listBertahan.get(i).open, rand1, rand2);
+                        
+                    }
                 }
             }
 
         }
+        System.out.println("okok");
         fixKromosom(2);
         hitungfitness(2);
-//        System.out.println("ok");
         Collections.sort(p.listBertahan);
         if (p.listBertahan.size() > jKromosom) {
             for (int i = jKromosom; i < p.listBertahan.size() - 1; i++) {
