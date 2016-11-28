@@ -22,6 +22,8 @@ public class Driver {
         Graf graf = new Graf();
         int jKromosom, jGenerasi;
         double pCross,pMutasi;
+        System.out.println("Kada suka looping forever jadi coba run >1x");
+        System.out.println("********************************************");
         
         System.out.print("Jumlah Kromosom : "); jKromosom = scan.nextInt();
         System.out.print("Jumlah Generasi : "); jGenerasi = scan.nextInt();
@@ -70,7 +72,7 @@ public class Driver {
             }
 //            System.out.println("ok");
             ga.mutasi();
-            System.out.println("====================BERTAHAN====================");
+            System.out.println("==================BERTAHAN+MUTASI==================");
             h=0;
             for (Kromosom k : ga.p.listBertahan) {
                 System.out.print("["+h+"]");
