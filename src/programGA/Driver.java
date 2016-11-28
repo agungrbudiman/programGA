@@ -20,67 +20,77 @@ public class Driver {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         Graf graf = new Graf();
-        int jKromosom, jGenerasi;
+        int jKromosom=10, jGenerasi=5;
+        double pCross=0.25,pMutasi=0.5;
         
-        System.out.print("Jumlah Kromosom : "); jKromosom = scan.nextInt();
-        System.out.print("Jumlah Generasi : "); jGenerasi = scan.nextInt();
+//        System.out.print("Jumlah Kromosom : "); jKromosom = scan.nextInt();
+//        System.out.print("Jumlah Generasi : "); jGenerasi = scan.nextInt();
+//        System.out.print("Probabilitas Crossover : "); pCross = scan.nextDouble();
+//        System.out.print("Probabilitas Mutasi : "); pMutasi = scan.nextDouble();
         
-        GA2 ga = new GA2(graf,jKromosom);
+        GA2 ga = new GA2(graf,jKromosom,pCross,pMutasi);
         ga.generateKromosom();
         
-        for (int i = 0; i < jGenerasi; i++) {;
+        for (int i = 0; i < jGenerasi; i++) {
+            int h;
             ga.fixKromosom(0);
             ga.hitungfitness(0);
             System.out.println("==================GENERASI KE-"+(i+1)+"==================");
             System.out.println("===================CALON PARENT===================");
+            h=0;
             for (Kromosom k : ga.p.listParent) {
+                System.out.print("["+h+"]");
                 for (int j = 0; j < k.listGen.size(); j++) {
-                    System.out.print(k.getGen(j)+" "); 
+                    System.out.print(k.getGen(j)+" ");  
                 }
                 System.out.println("fitness : "+k.fitness);
+                h++;
             }
             ga.seleksi();
-            System.out.println("====================PASANGAN====================");
+            System.out.println("====================SELEKSI====================");
+            h=0;
             for (Kromosom k : ga.p.listParent) {
+                System.out.print("["+h+"]");
                 for (int j = 0; j < k.listGen.size(); j++) {
-                    System.out.print(k.getGen(j)+" "); 
+                    System.out.print(k.getGen(j)+" ");  
                 }
                 System.out.println("fitness : "+k.fitness);
+                h++;
             }
             ga.crossover();
             System.out.println("======================ANAK======================");
+            h=0;
             for (Kromosom k : ga.p.listAnak) {
-                for (int j = 0; j < k.listGen.size(); j++) {
-                    System.out.print(k.getGen(j)+" "); 
+                System.out.print("["+h+"]");
+                for (int j= 0; j < k.listGen.size(); j++) {
+                    System.out.print(k.getGen(j)+" ");  
                 }
                 System.out.println("fitness : "+k.fitness);
+                h++;
             }
             ga.mutasi();
+            System.out.println("ok");
             System.out.println("====================BERTAHAN====================");
+            h=0;
             for (Kromosom k : ga.p.listBertahan) {
+                System.out.print("["+h+"]");
                 for (int j = 0; j < k.listGen.size(); j++) {
                     System.out.print(k.getGen(j)+" "); 
                 }
                 System.out.println("fitness : "+k.fitness);
+                h++;
             }
             System.out.print("jalur terbaik : ");
             for (int j = 0; j < ga.p.listBertahan.get(0).listGen.size(); j++) {
                 System.out.print(ga.p.listBertahan.get(0).getGen(j)+" ");
             }
+             System.out.println(", Cost = "+(int)(1/ga.p.listBertahan.get(0).fitness)+" menit");
             System.out.println("");
-            System.out.println("Cost = "+(int)(1/ga.p.listBertahan.get(0).fitness)+" menit");
-            
+           
             ArrayList<Kromosom> temp = (ArrayList<Kromosom>) ga.p.listBertahan.clone();
             ga.p = new Populasi();
-            for (int j = 0; j < temp.size(); j++) {
-                ga.p.listParent.add(new Kromosom());
-                for (int jj = 0; jj < temp.get(j).listGen.size(); jj++) {
-                   ga.p.listParent.get(j).addGen(temp.get(j).getGen(jj)); 
-                   if(jj < temp.get(j).open.size()) {
-                       ga.p.listParent.get(j).addOpen(temp.get(j).getOpen(jj)); 
-                   }
-                }
-            }
+            ga.p.listParent = (ArrayList<Kromosom>) temp.clone();
+
             System.out.println("");
         }
   

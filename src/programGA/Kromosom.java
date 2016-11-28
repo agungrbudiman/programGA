@@ -43,12 +43,7 @@ public class Kromosom implements Comparable<Kromosom> {
 
     @Override
     public int compareTo(Kromosom k) {
-       if(this.fitness > k.fitness) {
-           return -1;
-       }
-       else {
-           return 1;
-       }
+       return Double.compare(k.fitness, this.fitness);
     }
     
 }
