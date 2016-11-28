@@ -85,7 +85,6 @@ public class GA2 {
             }
             while (i < k.listGen.size()) {
                 if (graf.cekJalur('G', k.getGen(i))) {
-//                System.out.println(k.getGen(i));
                     for (int j = i + 1; j < k.listGen.size(); j++) {
                         if (k.getGen(j) != 0) {
                             k.addOpen(k.getGen(j));
@@ -96,7 +95,6 @@ public class GA2 {
                 } else if (i < k.listGen.size() - 1) {
                     int j = i + 1;
                     while (j < k.listGen.size() && !graf.cekJalur(k.getGen(i), k.getGen(j))) {
-//                        System.out.println("ok");
                         if (k.getGen(j) != 0) {
                             k.addOpen(k.getGen(j));
                         }
@@ -112,7 +110,6 @@ public class GA2 {
         }
         for (Kromosom k : pointer) {
             k.listGen.removeAll(Arrays.asList('0'));
-//                System.out.println(k.getGen(k.listGen.size() - 1));
             while (!graf.cekJalur('G', k.getGen(k.listGen.size() - 1))) {
                 for (int i = 0; i < k.open.size(); i++) {
                     if (graf.cekJalur(k.getGen(k.listGen.size() - 1), k.getOpen(i)) && graf.cekJalur('G', k.getOpen(i))) {
@@ -176,8 +173,6 @@ public class GA2 {
             int i = 0;
             double randomNum = randomDouble(0, 1);
             while (randomNum >= p.probKumulatif.get(i)) {
-//            System.out.println(randomNum+"-"+p.probKumulatif.get(i));
-//                System.out.println("ok");
                 i++;
             }
             temp.add(new Kromosom());
@@ -188,7 +183,6 @@ public class GA2 {
                     temp.get(temp.size() - 1).addOpen(p.getParent(i).getOpen(j));
                 }
             }
-//            temp.addParent(p.getParent(i));
         }
         p.listParent.clear();
         p.listParent = (ArrayList<Kromosom>) temp.clone();
@@ -198,34 +192,36 @@ public class GA2 {
         ArrayList<Integer> list = new ArrayList();
         for (int i = 0; i < p.listParent.size(); i++) {
             double randNum = randomDouble(0, 1);
-//            System.out.println(randNum);
             if (randNum < pCross) {
                 list.add(i);
             }
         }
-//        System.out.println(list);
-        if (list.size() > 0) {
+        if (list.size() > 1) {
 
-            for (int i = 0; i < p.listParent.size(); i++) {
+            for (int p1 = 0; p1 < p.listParent.size(); p1++) {
                 boolean sign = false;
-                int jj = 0;
+                int p2 = 0;
                 for (int k = 0; k < list.size(); k++) {
-                    if (i == list.get(k)) {
+                    if (p1 == list.get(k)) {
                         if (k < list.size() - 1) {
-                            jj = list.get(k + 1);
+                            p2 = list.get(k + 1);
                             sign = true;
                             break;
                         }
                     }
                 }
-                if (sign && jj != 0) {
-//            System.out.println("ok");
+                if (list.size() > 2 && p1 == p.listParent.size()-1) {
+//                    System.out.println("ok");
+                    sign = true;
+                    p2 = list.get(0);
+                }
+                if (sign && p2 != p1) {
 
                     int minSize = 0;
-                    if (p.getParent(i).listGen.indexOf('0') <= p.getParent(jj).listGen.indexOf('0')) {
-                        minSize = p.getParent(i).listGen.indexOf('0') - 1;
+                    if (p.getParent(p1).listGen.indexOf('0') <= p.getParent(p2).listGen.indexOf('0')) {
+                        minSize = p.getParent(p1).listGen.indexOf('0') - 1;
                     } else {
-                        minSize = p.getParent(jj).listGen.indexOf('0') - 1;
+                        minSize = p.getParent(p2).listGen.indexOf('0') - 1;
                     }
                     int rand1 = randomInteger(0, minSize);
                     int rand2 = randomInteger(0, minSize);
@@ -234,44 +230,41 @@ public class GA2 {
                         rand2 = rand1 - rand2;
                         rand1 = rand1 - rand2;
                     }
-//                System.out.print("cr : "+rand1+"-"+rand2+"||");
                     HashSet<Character> temp = new HashSet();
                     p.listAnak.add(new Kromosom());
-                    for (Character c : p.getParent(jj).listGen) {
+                    for (Character c : p.getParent(p2).listGen) {
                         p.listAnak.get(p.listAnak.size() - 1).addGen(c);
                     }
-                    for (Character c : p.getParent(jj).open) {
+                    for (Character c : p.getParent(p2).open) {
                         temp.add(c);
-                        p.listAnak.get(p.listAnak.size() - 1).addOpen(c);
+//                        p.listAnak.get(p.listAnak.size() - 1).addOpen(c);
                     }
-                    for (Character c : p.getParent(i).open) {
+                    for (Character c : p.getParent(p1).open) {
                         temp.add(c);
-                        p.listAnak.get(p.listAnak.size() - 1).addOpen(c);
+//                        p.listAnak.get(p.listAnak.size() - 1).addOpen(c);
                     }
-                    p.listAnak.get(p.listAnak.size() - 1).open.clear();
+//                    p.listAnak.get(p.listAnak.size() - 1).open.clear();
                     for (Character c : temp) {
                         p.listAnak.get(p.listAnak.size() - 1).open.add(c);
                     }
 
                     for (int j = rand1; j <= rand2; j++) {
+                        boolean signn = false;
                         int k;
-                        for (k = 0; k < p.getParent(jj).listGen.size() && k != -1; k++) {
-                            if (p.getParent(jj).getGen(k) == p.getParent(i).getGen(j)) {
-                                k = -1;
+                        for (k = 0; k < p.getParent(p2).listGen.size(); k++) {
+                            if (p.getParent(p2).getGen(k) == p.getParent(p1).getGen(j)) {
+                                signn = true;
                                 break;
                             }
                         }
-                        if (k != -1) {
-                            p.getAnak(p.listAnak.size() - 1).listGen.set(j, p.getParent(i).getGen(j));
+                        if (!signn) {
+                            p.getAnak(p.listAnak.size() - 1).listGen.set(j, p.getParent(p1).getGen(j));
                         }
-
-                    }
-//            i = jj-1;    
-        fixKromosom(1);
-        hitungfitness(1);
+                    } 
                 }
             }
-//        System.out.println("ok2");
+                fixKromosom(1);
+                hitungfitness(1);
         }
     }
 
@@ -294,16 +287,14 @@ public class GA2 {
                         p.getBertahan(p.listBertahan.size() - 1).addOpen(k.getOpen(i));
                     }   
                 }
-//            System.out.println("ok");
             }
         }
         
-          for (int i = 0; i < p.listBertahan.size(); i++) {
+        for (int i = 0; i < p.listBertahan.size(); i++) {
             double randNum = randomDouble(0, 1);
             if (randNum < pMutasi) {
                 int rand1 = randomInteger(0, p.listBertahan.get(i).listGen.indexOf('0') - 1);
                 int rand2 = randomInteger(0, p.listBertahan.get(i).listGen.indexOf('0') - 1);
-//                System.out.print("mutasi : "+i+"-"+rand1+"-"+rand2+"||");
                 if (rand1 != rand2) {
                     Collections.swap(p.listBertahan.get(i).listGen, rand1, rand2);
                 }
@@ -311,25 +302,11 @@ public class GA2 {
 
         }
 
-//        double randNum = randomDouble(0, 1);
-//        if (randNum < pMutasi) {
-//            for (int i = 0; i < p.listBertahan.size(); i++) {
-//                int rand1 = randomInteger(0, p.listBertahan.get(i).listGen.indexOf('0') - 1);
-//                int rand2 = randomInteger(0, p.listBertahan.get(i).listGen.indexOf('0') - 1);
-////                System.out.print("mutasi : "+i+"-"+rand1+"-"+rand2+"||");
-//                if (rand1 != rand2) {
-//                    Collections.swap(p.listBertahan.get(i).listGen, rand1, rand2);
-//                }
-//            }
-//
-//        }
         fixKromosom(2);
         hitungfitness(2);
-//        System.out.println("okok");
         Collections.sort(p.listBertahan);
         if (p.listBertahan.size() > jKromosom) {
             for (int i = jKromosom; i < p.listBertahan.size(); i++) {
-//                System.out.println("ok");
                 p.listBertahan.set(i, null);
             }
             p.listBertahan.removeAll(Arrays.asList(null, 0));
