@@ -297,10 +297,10 @@ public class GA2 {
 //            System.out.println("ok");
             }
         }
-
-        double randNum = randomDouble(0, 1);
-        if (randNum < pMutasi) {
-            for (int i = 0; i < p.listBertahan.size(); i++) {
+        
+          for (int i = 0; i < p.listBertahan.size(); i++) {
+            double randNum = randomDouble(0, 1);
+            if (randNum < pMutasi) {
                 int rand1 = randomInteger(0, p.listBertahan.get(i).listGen.indexOf('0') - 1);
                 int rand2 = randomInteger(0, p.listBertahan.get(i).listGen.indexOf('0') - 1);
 //                System.out.print("mutasi : "+i+"-"+rand1+"-"+rand2+"||");
@@ -310,12 +310,25 @@ public class GA2 {
             }
 
         }
+
+//        double randNum = randomDouble(0, 1);
+//        if (randNum < pMutasi) {
+//            for (int i = 0; i < p.listBertahan.size(); i++) {
+//                int rand1 = randomInteger(0, p.listBertahan.get(i).listGen.indexOf('0') - 1);
+//                int rand2 = randomInteger(0, p.listBertahan.get(i).listGen.indexOf('0') - 1);
+////                System.out.print("mutasi : "+i+"-"+rand1+"-"+rand2+"||");
+//                if (rand1 != rand2) {
+//                    Collections.swap(p.listBertahan.get(i).listGen, rand1, rand2);
+//                }
+//            }
+//
+//        }
         fixKromosom(2);
         hitungfitness(2);
 //        System.out.println("okok");
         Collections.sort(p.listBertahan);
         if (p.listBertahan.size() > jKromosom) {
-            for (int i = jKromosom; i < p.listBertahan.size() - 1; i++) {
+            for (int i = jKromosom; i < p.listBertahan.size(); i++) {
 //                System.out.println("ok");
                 p.listBertahan.set(i, null);
             }

@@ -38,7 +38,7 @@ public class Driver {
             ga.fixKromosom(0);
             ga.hitungfitness(0);
             System.out.println("==================GENERASI KE-"+(i+1)+"==================");
-            System.out.println("===================CALON PARENT===================");
+            System.out.println("===================CALON PARENT==================");
             h=0;
             for (Kromosom k : ga.p.listParent) {
                 System.out.print("["+h+"]");
@@ -49,16 +49,16 @@ public class Driver {
                 h++;
             }
             ga.seleksi();
-            System.out.println("====================SELEKSI====================");
-            h=0;
-            for (Kromosom k : ga.p.listParent) {
-                System.out.print("["+h+"]");
-                for (int j = 0; j < k.listGen.size(); j++) {
-                    System.out.print(k.getGen(j)+" ");  
-                }
-                System.out.println("fitness : "+k.fitness);
-                h++;
-            }
+//            System.out.println("====================SELEKSI====================");
+//            h=0;
+//            for (Kromosom k : ga.p.listParent) {
+//                System.out.print("["+h+"]");
+//                for (int j = 0; j < k.listGen.size(); j++) {
+//                    System.out.print(k.getGen(j)+" ");  
+//                }
+//                System.out.println("fitness : "+k.fitness);
+//                h++;
+//            }
             ga.crossover();
             System.out.println("======================ANAK======================");
             h=0;
@@ -72,7 +72,7 @@ public class Driver {
             }
 //            System.out.println("ok");
             ga.mutasi();
-            System.out.println("==================BERTAHAN+MUTASI==================");
+            System.out.println("================BERTAHAN+MUTASI=================");
             h=0;
             for (Kromosom k : ga.p.listBertahan) {
                 System.out.print("["+h+"]");
